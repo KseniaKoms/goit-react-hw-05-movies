@@ -1,15 +1,14 @@
-import { Link, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getTrendFilms } from '../services/FilmApi';
 
-function Home() {
+function HomePage() {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
     async function trendFilms() {
       try {
         const movies = await getTrendFilms();
-        setFilms(movies);
+        setFilms(movies.results);
       } catch (error) {
         console.log(error);
       }
@@ -18,15 +17,15 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="movies">Movies</Link>
-        <Home films={films} />
-        <Outlet />
-      </nav>
-    </div>
+    <>
+      <h2>Trending today</h2>
+      <ul>
+        {films.map(({ id, original_title }) => {
+          return <li key={id}>{original_title}</li>;
+        })}
+      </ul>
+    </>
   );
 }
 
-export default Home;
+export default HomePage;
