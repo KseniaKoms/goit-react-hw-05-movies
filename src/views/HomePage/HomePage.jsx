@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getTrendFilms } from '../services/FilmApi';
+import { getTrendFilms } from '../../services/FilmApi';
+import MoviesList from 'components/MoviesList/MoviesList';
 
 function HomePage() {
   const [films, setFilms] = useState([]);
@@ -8,7 +9,7 @@ function HomePage() {
     async function trendFilms() {
       try {
         const movies = await getTrendFilms();
-        setFilms(movies.results);
+        setFilms(movies);
       } catch (error) {
         console.log(error);
       }
@@ -19,11 +20,7 @@ function HomePage() {
   return (
     <>
       <h2>Trending today</h2>
-      <ul>
-        {films.map(({ id, original_title }) => {
-          return <li key={id}>{original_title}</li>;
-        })}
-      </ul>
+      <MoviesList films={films} />
     </>
   );
 }
