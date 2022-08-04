@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useParams, useLocation, Outlet, NavLink } from 'react-router-dom';
 import { getFilmDetails } from 'services/FilmApi';
 import MovieInfo from 'components/MovieInfo/MovieInfo';
@@ -29,14 +29,17 @@ const MoviesDetails = () => {
     };
     filmInfo();
   }, [movieId]);
+
   return (
     <>
       <GoBackButton goBackLink={goBackLink} />
       <MovieInfo
         title={film.title}
         poster={poster}
-        userScore={film.vote_average}
+        userScore={Math.round(film.vote_average * 10)}
         genres={film.genres}
+        releaseDate={film.release_date}
+        overview={film.overview}
       />
       <NavLink to="cast" state={{ from: goBackLink }}>
         Cast
@@ -44,7 +47,9 @@ const MoviesDetails = () => {
       <NavLink to="reviews" state={{ from: goBackLink }}>
         Reviews
       </NavLink>
-      <Outlet />
+      <Suspense fallback={<div>Loading..</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

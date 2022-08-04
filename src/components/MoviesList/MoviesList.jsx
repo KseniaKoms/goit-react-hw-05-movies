@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieItem from 'components/MovieItem/MovieItem';
+import PropTypes from 'prop-types';
 
 const MoviesList = ({ films }) => {
   return (
@@ -12,3 +13,7 @@ const MoviesList = ({ films }) => {
 };
 
 export default MoviesList;
+
+MoviesList.propType = {
+  films: PropTypes.array.isRequired,
+};

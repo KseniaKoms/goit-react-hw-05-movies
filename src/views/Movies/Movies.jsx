@@ -19,12 +19,15 @@ function Movies() {
       try {
         const movies = await getSearchFilms(query);
         setSearchQuery(movies);
+        if (movies.length === 0) {
+          return Notify.failure(`Sorry, we have no films named ${inputValue}`);
+        }
       } catch (error) {
         console.log(error.message);
       }
     };
     searchMovies();
-  }, [query]);
+  }, [query, inputValue]);
 
   const handleChange = event => {
     setInputValue(event.target.value.toLowerCase());
