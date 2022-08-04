@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { getSearchFilms } from '../../services/FilmApi';
 import { Notify } from 'notiflix';
 import MoviesList from 'components/MoviesList/MoviesList';
+import styles from './Movies.module.css';
 
 function Movies() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -44,7 +45,7 @@ function Movies() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
           name="search"

@@ -3,6 +3,7 @@ import { useParams, useLocation, Outlet, NavLink } from 'react-router-dom';
 import { getFilmDetails } from 'services/FilmApi';
 import MovieInfo from 'components/MovieInfo/MovieInfo';
 import GoBackButton from 'components/GoBackButton/GoBackButton';
+import styles from './MoviesDetails.module.css';
 
 const MoviesDetails = () => {
   const [film, setFilm] = useState({});
@@ -41,12 +42,23 @@ const MoviesDetails = () => {
         releaseDate={film.release_date}
         overview={film.overview}
       />
-      <NavLink to="cast" state={{ from: goBackLink }}>
-        Cast
-      </NavLink>
-      <NavLink to="reviews" state={{ from: goBackLink }}>
-        Reviews
-      </NavLink>
+      <div className={styles.additional}>
+        <p>Additional information</p>
+        <NavLink
+          to="cast"
+          state={{ from: goBackLink }}
+          className={({ isActive }) => (isActive ? styles.active : styles.link)}
+        >
+          Cast
+        </NavLink>
+        <NavLink
+          to="reviews"
+          state={{ from: goBackLink }}
+          className={({ isActive }) => (isActive ? styles.active : styles.link)}
+        >
+          Reviews
+        </NavLink>
+      </div>
       <Suspense fallback={<div>Loading..</div>}>
         <Outlet />
       </Suspense>

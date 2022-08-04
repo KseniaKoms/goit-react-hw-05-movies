@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './MovieInfo.module.css';
 
 const MovieInfo = ({
   title,
@@ -10,17 +11,19 @@ const MovieInfo = ({
   overview,
 }) => {
   return (
-    <>
-      <img src={poster} alt={title} width="300" />
-      <h2>
-        {title} {releaseDate && releaseDate.slice(0, 4)}
-      </h2>
-      <h3>User score: {userScore}% </h3>
-      <h3>Overview</h3>
-      <p>{overview}</p>
-      <h3>Genres</h3>
-      {genres && <p>{genres.map(({ name }) => name).join(' ')}</p>}
-    </>
+    <div className={styles.filmContainer}>
+      <img src={poster} alt={title} width="200" />
+      <div className={styles.infoBox}>
+        <h2>
+          {title} {releaseDate && <span>({releaseDate.slice(0, 4)})</span>}
+        </h2>
+        <h3>User score: {userScore}% </h3>
+        <h3>Overview</h3>
+        <p>{overview}</p>
+        <h3>Genres</h3>
+        {genres && <p>{genres.map(({ name }) => name).join(', ')}</p>}
+      </div>
+    </div>
   );
 };
 

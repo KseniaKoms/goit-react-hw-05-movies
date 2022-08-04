@@ -10,7 +10,6 @@ const Cast = () => {
     const getCastInfo = async () => {
       try {
         const castInfo = await getFilmCredits(movieId);
-        console.log(castInfo);
         setCast(castInfo);
       } catch (error) {
         console.log(error.message);
@@ -27,7 +26,9 @@ const Cast = () => {
 
   return (
     <div>
-      {cast.length > 0 ? (
+      {cast.length === 0 ? (
+        <p>No cast info</p>
+      ) : (
         <ul>
           {cast.map(({ id, profile_path, name, character }) => {
             return (
@@ -39,8 +40,6 @@ const Cast = () => {
             );
           })}
         </ul>
-      ) : (
-        <p>No cast info</p>
       )}
     </div>
   );

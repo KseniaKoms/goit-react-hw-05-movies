@@ -1,0 +1,7 @@
+.filmContainer {
+  display: flex;
+}
+
+.infoBox {
+  margin-left: 15px;
+}
