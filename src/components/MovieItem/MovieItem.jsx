@@ -6,7 +6,7 @@ import styles from '../MovieItem/MovieItem.module.css';
 const MovieItem = ({ id, title }) => {
   const location = useLocation();
   return (
-    <li key={id} className={styles.item}>
+    <li className={styles.item}>
       <NavLink
         to={`/movies/${id}`}
         state={{ from: location }}

@@ -33,7 +33,7 @@ MovieInfo.propType = {
   title: PropTypes.string.isRequired,
   poster: PropTypes.string.isRequired,
   userScore: PropTypes.number.isRequired,
-  genres: PropTypes.array.isRequired,
+  genres: PropTypes.string.isRequired,
   releaseDate: PropTypes.number.isRequired,
   overview: PropTypes.string.isRequired,
 };
